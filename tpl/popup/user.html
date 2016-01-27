@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'LABEL.SELECT_USER' | translate}}</h3>
+</div>
+<div class="modal-body list-branch">
+    <ul>
+        <li class="bg-blue">
+            <label class="checkbox">
+                <div class="checker">
+                    <span ng-class="{checked: company.indexOf(1) != -1}">
+                        <input type="checkbox" data-ng-checked="company.indexOf(1) != -1" data-ng-click="toggleCheckCompany(1)">
+                    </span>
+                </div>
+                {{'LABEL.ALL_COMPANY' | translate}} ({{listData.length}})
+            </label>
+            <ul>
+                <li data-ng-repeat="(index,oneBranch) in listData" class="bg-branch">
+                    <span class="label">
+                        <span class="icon text-info">
+                            <i class="fa" data-ng-class="{'fa-minus' : oneBranch.opened == true, 'fa-plus' : (oneBranch.opened == undefined || oneBranch.opened == false) }" data-ng-click="(listData[index].opened != undefined && listData[index].opened == true) ? listData[index].opened = false :  listData[index].opened = true"></i>
+                        </span>
+                        <label class="checkbox">
+                            <div class="checker">
+                                <span ng-class="{checked: branch.indexOf(oneBranch.id) != -1}">
+                                    <input type="checkbox" data-ng-checked="branch.indexOf(oneBranch.id) != -1" data-ng-click="toggleCheckBranch(oneBranch)">
+                                </span>
+                            </div>
+                            {{oneBranch.name}} ({{oneBranch.department.length}})
+                        </label>
+                    </span>
+                    <ul data-ng-show="oneBranch.opened == true">
+                        <li data-ng-repeat="(index2,oneDepartment) in oneBranch.department" class="bg-department">
+                            <span class="label">
+                                <span class="icon text-info">
+                                    <i class="fa" data-ng-class="{'fa-minus' : oneDepartment.opened == true, 'fa-plus' : (oneDepartment.opened == undefined || oneDepartment.opened == false) }" data-ng-click="(listData[index].department[index2].opened != undefined && listData[index].department[index2].opened == true) ? listData[index].department[index2].opened = false :  listData[index].department[index2].opened = true"></i>
+                                </span>
+                                <label class="checkbox">
+                                    <div class="checker">
+                                        <span ng-class="{checked: department.indexOf(oneDepartment.id) != -1}">
+                                            <input type="checkbox" data-ng-checked="department.indexOf(oneDepartment.id) != -1" data-ng-click="toggleCheckDepartment(oneDepartment)">
+                                        </span>
+                                    </div>
+                                    {{oneDepartment.name}} ({{oneDepartment.users.length}})
+                                </label>
+                            </span>
+                            <ul data-ng-show="oneDepartment.opened == true">
+                                <li data-ng-repeat="oneUser in oneDepartment.users" class="bg-user">
+                                    <span class="label">
+                                        <label class="checkbox">
+                                            <div class="checker">
+                                                <span ng-class="{checked: users.indexOf(oneUser.id) != -1}">
+                                                    <input type="checkbox" data-ng-checked="users.indexOf(oneUser.id) != -1" data-ng-click="toggleCheckUser(oneUser)">
+                                                </span>
+                                            </div>
+                                            {{oneUser.fullname}} - {{oneUser.position.name}}
+                                        </label>
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="select()">{{'LABEL.OK' | translate}}</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{'LABEL.CANCEL' | translate}}</button>
+</div>

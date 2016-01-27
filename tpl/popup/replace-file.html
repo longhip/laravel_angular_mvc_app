@@ -1,0 +1,139 @@
+<form class="form-horizontal" data-ng-init="viewFile()">
+    <div class="modal-header">
+        <h3 class="modal-title">{{'LABEL.REPLACE_BY_NEW_FILE' | translate}}</h3>
+    </div>    
+    <div class="modal-body">
+        <div class="container">
+            <div class="row col-md-6">
+                <div class="file-setup form-group">
+                    <div class="col-md-9">
+                        <label class="col-md-4 control-label">{{'LABEL.FILE_CURRENT' | translate}}</label>
+                        <div class="file input-group col-md-7"> 
+                            <a class="editable editable-click" value="{{ReplaceLibraryDigitalData.name}}">           
+                            {{ReplaceLibraryDigitalData.name}} ({{ReplaceLibraryDigitalData.size | number}} Kb <i class="fa fa-database"></i> )
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="form-group col-xs-12">                                
+                   <label class="col-md-3 control-label">{{'LABEL.File_REPLACE' | translate}}
+                   </label>
+                   <div class="input-group col-md-8 col-xs-12">
+                        <span class="btn green fileinput-button">
+                            <i class="fa fa-paperclip"></i>
+                            <span>Chọn tệp</span>
+                            <input type="file" nv-file-select="File" name="url" uploader="uploader" data-ng-model="ReplaceLibraryDigitalData.file_new_name"/> 
+                            <input type="hidden" data-ng-model="ReplaceLibraryDigitalData.file_new_size" data-ng-value="ReplaceLibraryDigitalData.file_new_size">
+                            <input type="hidden" data-ng-model="ReplaceLibraryDigitalData.file_new_full_url" data-ng-value="ReplaceLibraryDigitalData.file_new_full_url">   
+                            <input type="hidden" data-ng-model="ReplaceLibraryDigitalData.file_new_url" data-ng-value="ReplaceLibraryDigitalData.file_new_url">
+                       </span>
+                   </div>   
+               </div>
+
+               <div class="form-group col-xs-12">
+                    <div class="file-replace file input-group col-md-8 col-md-offset-3" ng-if="ReplaceLibraryDigitalData.file_new_size > 0">
+                        <a class="editable editable-click" value="{{ReplaceLibraryDigitalData.file_new_name}}">           
+                        {{ReplaceLibraryDigitalData.file_new_name}} ({{ReplaceLibraryDigitalData.file_new_size | number}} Kb <i class="fa fa-database"></i> )
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.OPTION' | translate}}</label>
+                    <div class="input-group col-md-8">
+                        <label>
+                            <input type="checkbox" data-ng-model="ReplaceLibraryDigitalData.delCheck" ng-true-value="1" ng-false-value="0">
+                            {{'LABEL.DELETE_OLD_FILE' | translate}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.DESCRIPTION' | translate}}</label>
+                    <div class="input-group col-md-8 col-xs-12">
+                        <input type="text" class="form-control validate[required]" ng-change="save_temp()" data-ng-model="ReplaceLibraryDigitalData.description" />
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">   
+                    <label class="col-md-3 control-label">{{'LABEL.TAGS' | translate}}</label>                         
+                    <div class="input-group col-md-8">
+                        <tags-input ng-model="ReplaceLibraryDigitalData.tag" display-property="tag">
+                        </tags-input>
+                    </div>
+                </div>
+               
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.START_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">
+                        <input type="text" class="form-control" data-ng-model="ReplaceLibraryDigitalData.time_create" datetime-picker-jquery id="time_create" date-format="d/m/Y"/>
+                        <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="time_create"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.EXPERT_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">           
+                        <input type="text" class="form-control" data-ng-model="ReplaceLibraryDigitalData.date_expert" datetime-picker-jquery id="date_expert" date-format="d/m/Y" />
+                         <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="date_expert"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.ALERT_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">          
+                        <input type="text" class="form-control" data-ng-model="ReplaceLibraryDigitalData.date_alert" datetime-picker-jquery id="date_alert" date-format="d/m/Y"/>
+                        <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="date_alert"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label class="control-label col-md-11 small-title">({{'MESSAGE.WHEN_THIS_DATE_COME,SYSTEM_WILL_AUTO_SEND_SMS_TO_PERSON_SELECT' | translate}})</label>
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.ALERT_FOR' | translate}}</label>
+                    <div class="input-group col-md-offset-3 col-md-8">
+                        <tags-input ng-model="ReplaceLibraryDigitalData.list_user" display-property="fullname" placeholder="{{'LABEL.ADD_AN_USER'|translate }}"
+                        replace-spaces-with-dashes="false"
+                        add-from-autocomplete-only="true"
+                        on-tag-added="addUser($tag)"
+                        on-tag-removed="removeUser($tag,'users')">
+                            <auto-complete display-property="fullname"
+                            source="loadUsers($query)"
+                             min-length="0"
+                            template="template/search-user.html"
+                             max-results-to-show="12"></auto-complete>
+                        </tags-input>
+                        <div class="input-group-btn">
+                            <button data-ng-click="openModal()" class="btn" type="button"><i class="fa fa-book"></i> {{'LABEL.SELECT' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.NOTE' | translate}}</label>
+                    <div class="input-group col-md-8 col-xs-12">
+                        <textarea class="form-control" ng-model="ReplaceLibraryDigitalData.note"></textarea>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="select()">{{'LABEL.OK' | translate}}</button>
+        <button class="btn btn-warning" ng-click="cancel()">{{'LABEL.CANCEL' | translate}}</button>
+    </div>
+</form>

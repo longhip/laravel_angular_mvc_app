@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="MonsterApp"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="MonsterApp"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" data-ng-app="MonsterApp">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<title data-ng-bind="'SteedOffice | ' + $state.current.data.pageTitle"></title>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+
+<!-- BEGIN FONT GOOGLE STYLE -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+<!-- END FONT GOOGLE -->
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+<link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+<link id="ng_load_plugins_before"/>
+<!-- END DYMANICLY LOADED CSS FILES -->
+
+<!-- BEGIN THEME STYLES -->
+<link href="assets/global/css/components.min.css" id="style_components" rel="stylesheet" type="text/css" />
+<link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+<link href="assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+<!-- END THEME STYLES -->
+
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body ng-controller="AppController" class="page-header-fixed page-sidebar-closed-hide-logo page-on-load" ng-class="{'page-content-white': settings.layout.pageContentWhite,'page-container-bg-solid': settings.layout.pageBodySolid, 'page-sidebar-closed': settings.layout.pageSidebarClosed, login: $state.includes('access')}">
+
+    <!-- BEGIN PAGE SPINNER -->
+    <div ng-spinner-bar class="page-spinner-bar">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+    <!-- END PAGE SPINNER -->
+
+    <!-- BEGIN TOASTER -->
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
+    <!-- END TOASTER -->
+
+    <!-- BEGIN CONTENT VIEW -->
+    <div ui-view=""></div>
+    <!-- END CONTENT VIEW -->
+
+
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+    <!-- BEGIN CORE JQUERY PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="../../../assets/global/plugins/respond.min.js"></script>
+    <script src="../../../assets/global/plugins/excanvas.min.js"></script> 
+    <![endif]-->
+
+    <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+    <!-- END CORE JQUERY PLUGINS -->
+
+    <!-- BEGIN CORE ANGULARJS PLUGINS -->
+    <script src="assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>   
+    <script src="assets/global/plugins/angularjs/angular-cookies.min.js" type="text/javascript"></script>   
+    <!-- END CORE ANGULARJS PLUGINS -->
+
+    <!-- BEGIN CUSTOMER JS -->
+    <script type="text/javascript" src="assets/angular/plugins/toaster/toaster.js"></script>
+    <script type="text/javascript" src="assets/angular/plugins/translate/angular-translate.min.js"></script>
+    <script type="text/javascript" src="assets/angular/plugins/translate/angular-local-storage.min.js"></script>
+    <script type="text/javascript" src="assets/angular/plugins/translate/angular-translate-loader-url.min.js"></script>
+    <script type="text/javascript" src="assets/angular/plugins/translate/angular-translate-loader-partial.min.js"></script>
+    <script type="text/javascript" src="assets/angular/plugins/translate/angular-translate-storage-cookie.min.js"></script>    
+    <!-- END CUSTOMER JS -->
+
+    <!-- BEGIN SEVERVICE JS -->
+
+    <!-- END SEVERVICE JS -->
+
+    <!-- BEGIN DIRECTIVES JS -->
+
+    <!-- END DIRECTIVES JS -->
+
+    <!-- BEGIN FILTER JS -->
+
+    <!-- END FILTER JS -->
+    
+    <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+    <script src="app/app.js" type="text/javascript"></script>
+    <script src="app/routes.js" type="text/javascript"></script>
+    <script src="app/directives.js" type="text/javascript"></script>
+    <script src="app/filters.js" type="text/javascript"></script>    
+    <!-- END APP LEVEL ANGULARJS SCRIPTS -->
+
+    <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
+    <script src="assets/global/scripts/app.js" type="text/javascript"></script>
+    <script src="assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <!-- END APP LEVEL JQUERY SCRIPTS -->
+
+    <!--NodeJs Socket.io-->
+    <script src="node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+
+    <!--End NodeJs Socket.io-->
+    
+<!-- END BODY -->
+</html>

@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'LABEL.JOB_HISTORY' | translate}}</h3>
+</div>
+<div class="modal-body">
+    <div class="form-body">
+        <div class="form-group">
+            <label>{{'LABEL.JOB_HISTORY_TIME' | translate}}</label>
+            <div class="input-group col-xs-12">
+                <input type="text" class="form-control validate[required]" value="{{JobHistoryData.time_create*1000 | date : 'dd/MM/yyyy - HH:mm'}}" disabled="true" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{'LABEL.INTRO' | translate}}</label>
+            <div class="input-group col-xs-12">
+                <textarea class="form-control validate[required]" disabled="true" data-ng-model="JobHistoryData.intro"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>{{'LABEL.CONTENT' | translate}}</label>
+            <div class="input-group col-xs-12">
+                <textarea ckeditor="editorOptions" disabled="true" class="form-control validate[required]" data-ng-model="JobHistoryData.content"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>{{'LABEL.ATTACHMENT' | translate}}</label>
+        </div>
+
+        <div class="form-group row" data-ng-repeat="item in JobHistoryData.attachments">
+            <div class="col-xs-8">{{ item.name }}</div>
+            <div class="col-xs-2">{{ item.size | fileSize }} </div>
+            <div class="col-xs-2 text-right">
+                <a view-file="{{item.extension}}" url="{{item.file_url}}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
+                <a href="{{item.file_url}}" target="_blank"><i class="fa fa-download"></i></a></div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">{{'LABEL.OK' | translate}}</button>
+</div>

@@ -1,0 +1,92 @@
+<div class="form-horizontal" data-ng-init="reSetUp()">
+    <div class="modal-header">
+        <h3 class="modal-title">{{'LABEL.DETAIL_FILE' | translate}}</h3>
+    </div>    
+    <div class="modal-body">
+        <div class="container">
+            <div class="row col-md-6">
+            <!-- Thông tin tệp -->
+                <div class="form-group col-xs-12" data-ng-init="showname()">
+                    <div class="file-setup form-group">
+                        <label class="col-md-3 control-label">{{'LABEL.NAME_FILE' | translate}}</label>
+                        <div class="file input-group col-md-8" data-ng-model="DetailLibraryDigitalData.file_name" data-ng-value="fileTransferName">            
+                            <a class="editable editable-click" value="{{fileTransferName}}">{{fileTransferName}}</a>
+                        </div>
+                    </div>           
+                    <div class="file-setup form-group">
+                        <label class="col-md-3 control-label">{{'LABEL.SIZE' | translate}}</label>
+                        <div class="file input-group col-md-8" data-ng-model="DetailLibraryDigitalData.file_size" data-ng-value="fileTransferSize">            
+                            {{fileTransferSize}} Kilobytes <i class="fa fa-database"></i>
+                        </div>
+                    </div>  
+                </div>
+                <!-- Ngày bắt đầu -->
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.START_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">
+                        <input type="text" class="form-control validate[required,custom[date]]" data-ng-model="DetailLibraryDigitalData.time_create" datetime-picker-jquery id="time_create" date-format="d/m/Y - H:i"/>
+                        <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="time_create"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ngày hết hạn -->
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.EXPERT_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">            
+                        <input type="text" class="form-control validate[required,custom[date]]" data-ng-model="DetailLibraryDigitalData.date_expert" id="date_expert" datetime-picker-jquery date-format="d/m/Y - H:i"/>
+                        <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="date_expert"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ngày nhắc -->
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.ALERT_DATE' | translate}}</label>
+                    <div class="input-group col-md-5">            
+                        <input type="text" class="form-control validate[required,custom[date]]" data-ng-model="DetailLibraryDigitalData.date_alert" id="date_alert" datetime-picker-jquery date-format="d/m/Y - H:i"/>
+                        <div class="input-group-btn">
+                            <button class="btn" type="button" show-datetimepicker-trigger id-show="date_alert"><i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-md-11 control-label small-title">({{'MESSAGE.WHEN_THIS_DATE_COME,SYSTEM_WILL_AUTO_SEND_SMS_TO_PERSON_SELECT' | translate}})</label>
+                <!-- Nhắc nhở tới -->
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.ALERT_FOR' | translate}}</label>
+                    <div class="input-group col-md-offset-3 col-md-8">
+                        <tags-input ng-model="DetailLibraryDigitalData.list_user" display-property="fullname" placeholder="{{'LABEL.ADD_AN_USER'|translate }}"
+                        replace-spaces-with-dashes="false"
+                        add-from-autocomplete-only="true"
+                        on-tag-added="addUser($tag)"
+                        on-tag-removed="removeUser($tag,'users')">
+                            <auto-complete display-property="fullname"
+                            source="loadUsers($query)"
+                             min-length="0"
+                            template="template/search-user.html"
+                             max-results-to-show="12"></auto-complete>
+                        </tags-input>
+                        <div class="input-group-btn">
+                            <button data-ng-click="openModal()" class="btn" type="button"><i class="fa fa-book"></i> {{'LABEL.SELECT' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mô tả -->
+                <div class="form-group col-xs-12">
+                    <label class="col-md-3 control-label">{{'LABEL.NOTE' | translate}}</label>
+                    <div class="input-group col-md-8">
+                        <textarea ng-model="DetailLibraryDigitalData.note" class="form-control"></textarea>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="select()">{{'LABEL.OK' | translate}}</button>
+        <button class="btn btn-warning" ng-click="cancel()">{{'LABEL.CANCEL' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div>
+    <form data-ng-submit="InsertImage()">
+        <div class="modal-header">
+            <p class="modal-title"><i class="fa fa-image text-primary"></i><strong>  Thêm hình ảnh</strong></p>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="text-center">
+                    <div class="fileUpload btn btn-primary">
+                        <span><i class="fa fa-image"></i> {{'LABEL.MEDIA_UPLOAD_FILE' | translate}}</span>
+                        <input type="file" data-ng-model="file" nv-file-select="File" name="file" uploader="uploader" class="upload" multiple/>
+                    </div>
+                </div>
+                <hr/>
+                <div class="form-group row" data-ng-repeat="item in uploader.queue">
+                    <div class="col-xs-12 col-sm-6">{{ item.file.name }}</div>
+                    <div class="hidden-xs col-sm-2" data-ng-if="uploader.isHTML5">{{ item.file.size | fileSize }} </div>
+                    <div class="col-xs-12 col-sm-3" data-ng-if="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-1">
+                        <a href="#" data-ng-click="item.remove()"><i class="text-danger fa fa-trash"></i></a>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<label for="">Alt</label>-->
+                    <!--<input type="text" class="form-control" ng-model="alt" />-->
+                <!--</div>-->
+                <div class="form-group">
+                    <label for="">Width</label>
+                    <input type="text" class="form-control" placeholder="px" data-ng-model="width"/>
+                </div>
+                <div class="form-group">
+                    <label for="">Height</label>
+                    <input type="text" class="form-control" placeholder="px" data-ng-model="height"/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-sm" type="submit">Lưu lại</button>
+            <button class="btn btn-danger btn-sm" type="button" ng-click="cancel()">Hủy bỏ</button>
+        </div>
+    </form>
+</div>

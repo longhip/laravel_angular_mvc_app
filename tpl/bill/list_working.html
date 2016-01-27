@@ -1,0 +1,113 @@
+<div class="row" data-ng-controller="BillCtrl" data-ng-init="setup('working')">
+    <div class="col-lg-12">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <a ui-sref="app.dashboard">{{'BILL.BILL_MANAGER' | translate}}</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span>{{'BILL.LIST_WORKING' | translate}}</span>
+                </li>
+            </ul>
+        </div>
+
+        <h3 class="page-title">
+            {{'BILL.LIST_WORKING' | translate}}
+            <!--<small>dashboard &amp; statistics</small>-->
+        </h3>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="fa fa-bar-chart-o font-red"></i>
+                            <span class="caption-subject font-red bold uppercase">{{'BILL.LIST_BILL' | translate}}</span>
+                            <span class="caption-helper">{{'BILL.HAVE' | translate}} {{page.total}} {{'BILL.LIST_WORKING' | translate}}</span>
+                        </div>
+                        <div class="actions col-sm-3">
+                            <div class="input-icon right">
+                                <i class="fa fa-search"></i>
+                                <input data-ng-keyup="search_list_change($event)" data-ng-model="search" type="text" class="form-control" placeholder="{{'LABEL.SEARCH' | translate}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <!--end add form-->
+                        <table class="table table-hover table-light" data-ng-show="!showAddForm">
+                            <thead>
+                            <tr class="header">
+                                <th width="2%">#</th>
+                                <!--<th class="hidden-xs"  width="9%">Cơ sở</th>-->
+                                <!--<th width="10%">Trạng thái</th>-->
+                                <th class="hidden-xs"  width="20%">{{'BILL.BILL_REQUEST' | translate}}</th>
+                                <th width="10%">{{'BILL.TIME_SEND' | translate}}</th>
+                                <th class="hidden-xs"  width="10%">{{'BILL.TO_NAME' | translate}}</th>
+                                <th class="hidden-xs"  width="7%">{{'BILL.PHONE' | translate}}</th>
+                                <th class="hidden-xs"  width="15%">{{'BILL.ADDRESS' | translate}}</th>
+                                <th width="8%" style="text-align: right">{{'BILL.INTO_MONEY' | translate}}</th>
+                                <th width="8%" >{{'BILL.IMAGE_SAMPLE' | translate}}</th>
+                                <th width="8%" ></th>
+                                <!--<th width="9%">Thanh toán</th>-->
+                            </tr>
+                            </thead>
+                            <tbody class="custom-border-tbody" data-ng-repeat="bill in bills">
+                            <tr>
+                                <td >{{$index+1}}</td>
+                                <!--<td class="hidden-xs" >{{bill.branch_name}}</td>-->
+                                <!--<td style="vertical-align: middle">-->
+                                    <!--{{bill.status_name}}-->
+                                    <!--<div class="progress-info">-->
+                                        <!--<progressbar class="progress-bar-sm" type="{{bill.progress_type}}" value="bill.progress"></progressbar>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                                <td class="hidden-xs" us>{{bill.request}}</td>
+                                <td ><b>{{bill.time_end*1000  | date:'dd-MM-yyyy H:mm' }}</b></td>
+                                <td class="hidden-xs"  >{{bill.to_name}}</td>
+                                <td class="hidden-xs"  >{{bill.to_phone}}</td>
+                                <td class="hidden-xs"  >{{bill.to_address}}</td>
+                                <td style="text-align: right;">{{bill.price}}</td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: center;">
+                                    <span data-ng-click="show_row(bill.id)" data-ng-if="viewRows.indexOf(bill.id)<0" style="cursor: pointer" class="fa fa-plus-square-o"></span>
+                                    <span data-ng-click="show_row(bill.id)" data-ng-if="viewRows.indexOf(bill.id)>=0" style="cursor: pointer" class="fa fa-minus-square-o"></span>
+                                </td>
+                                <!--<td style="vertical-align: middle">{{bill.pay_name}}</td>-->
+                            </tr>
+                            <tr data-ng-if="viewRows.indexOf(bill.id)>=0" class="details">
+                                <td class="details" colspan="9">
+                                    <table width="100%">
+                                        <tr>
+                                            <td class="hidden-xs" style="text-align: right">
+                                                <h4>Chọn người xử lý:</h4>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <h4 class="visible-xs">{{'BILL.SELECT_USER_WORKING' | translate}}</h4>
+                                                <ul class="list-inline blog-images">
+                                                    <li data-ng-repeat="user in users">
+                                                        <a>
+                                                            <img data-ng-click="select_user(user.id)" data-ng-class="{'img-select':selectedUsers.indexOf(user.id)>=0}" tooltip-placement="top" tooltip="{{user.fullname}}" alt="{{user.fullname}}" src="{{user.avatar}}">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <p class="visible-xs">
+                                                    <button data-ng-show="selectedUsers.length>0" data-ng-click="update_worker()" class="btn green">{{'BILL.START' | translate}}</button>
+                                                    <button data-ng-click="cancel_select_user()" class="btn grey-steel">{{'LABEL.CANCEL' | translate}}</button>
+                                                </p>
+                                            </td>
+                                            <td width="20%" class="hidden-xs" style="text-align: right">
+                                                <button data-ng-show="selectedUsers.length>0" data-ng-click="update_worker()" class="btn green">{{'BILL.START' | translate}}</button>
+                                                <button data-ng-click="cancel_select_user()" class="btn grey-steel">{{'LABEL.CANCEL' | translate}}</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

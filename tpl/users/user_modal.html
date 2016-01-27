@@ -1,0 +1,135 @@
+
+<div class="modal-body" data-ng-init="onLoad()">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-blue-sharp">
+                <i class="icon-plus font-blue-sharp"></i>
+                {{'HEADER.ADD_NEW_USER' | translate}}
+            </div>
+        </div>
+
+        <div class="portlet-body form">
+            <form role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong><i class="icon-user"></i>{{'LABEL.ACCOUNT_INFORMATION' | translate}}</strong></p>
+                        <hr/>
+                        <div class="form-group">
+                            <label>{{'LABEL.FULL_NAME' | translate}}</label>
+                            <input type="text" class="form-control validate[required]" data-ng-model="UserData.fullname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>{{'LABEL.BIRTHDAY' | translate}}</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control validate[required]" data-ng-model="UserData.birthday" date-picker-jquery id="birthday" date-format="d/m/Y"/>
+                                <div class="input-group-btn">
+                                    <button class="btn" type="button" show-datepicker-trigger id-show="birthday"><i class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{'LABEL.GENDER' | translate}}</label>
+                            <div class="input-group">
+                                <label class="radio-inline"><input type="radio" name="gender" value="1" data-ng-model="UserData.gender">{{'LABEL.MALE' | translate}}</label>
+                                <label class="radio-inline"><input type="radio" name="gender" value="0" data-ng-model="UserData.gender">{{'LABEL.FEMALE' | translate}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{'LABEL.BRANCH' | translate}}</label>
+                            <div>
+                                <select class="form-control validate[required]" data-ng-model="UserData.branch_id" data-ng-options="item.id as item.name for item in listBranch"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="">{{'LABEL.DEPARTMENT' | translate}}</label>
+                            <div>
+                                <select class="form-control validate[required]" data-ng-model="UserData.department_id" data-ng-options="item.id as item.name for item in listDepartment"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{'LABEL.POSITION' | translate}}</label>
+                            <div>
+                                <select class="form-control validate[required]" data-ng-model="UserData.position_id" data-ng-options="item.id as item.name for item in listPosition"></select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label>{{'LABEL.GROUP' | translate}}</label>
+                                <div>
+                                    <select class="form-control validate[required]" data-ng-model="UserData.group_id" data-ng-options="item.id as item.name for item in listGroup"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <p><strong><i class="icon-login"></i> {{'LABEL.SIGN_IN_INFORMATION' | translate}}</strong></p>
+                        <hr/>
+                        <div class="form-group">
+                            <label>{{'LABEL.EMAIL' | translate}}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-envelope-open"></i>
+                                </span>
+                                <input type="text" class="form-control validate[required,custom[email]]" data-ng-model="UserData.email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{'LABEL.PHONE' | translate}}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-call-end"></i>
+                                </span>
+                                <input type="text" class="form-control validate[required]" data-ng-model="UserData.phone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{'LABEL.PASSWORD' | translate}}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-lock"></i>
+                                </span>
+                                <input type="password" name="password" id="password" class="form-control" data-ng-model="UserData.password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{'LABEL.PASSWORD_CONFIRM' | translate}}</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-lock"></i>
+                                </span>
+                                <input type="password" class="form-control validate[equals[password]]" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{'LABEL.UPLOAD_AVATAR' | translate}}</label>
+                            <div class="input-group">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="icon-cloud-upload"></i>
+                                    <span>Chọn tệp</span>
+                                    <input type="file" nv-file-select="File" name="File" uploader="avatarUploader"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img data-ng-src="{{ UserData.avatar_url }}" class="image_preview img-responsive" />
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <div class="pull-right">
+                                <button class="btn btn-success" ng-click="save()" type="submit"><i class="icon-check"></i> {{'LABEL.SUBMIT' | translate}}</button>
+                                <a class="btn btn-danger" ng-click="cancel()"><i class="icon-close"></i> {{'LABEL.CANCEL' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

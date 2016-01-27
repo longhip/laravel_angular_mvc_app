@@ -1,0 +1,20 @@
+{
+	"LABEL": {
+		"LOGIN_SUCCESS" : "Đăng nhập thành công",
+		"USER_IS_NOT_ACTIVE" : "Tài khoản chưa được kích hoạt",
+		"USER_HAS_BLOCKED" : "Tài khoản đã bị khóa",
+		"EMAIL_OR_PASSWORD_IS_INCORRECT" : "Email hoặc mật khẩu không chính xác",
+		"USERNAME_OR_PASSWORD_IS_INCORRECT" : "Tên đăng nhập hoặc mật khẩu không chính xác",
+		"EMAILORPHONE" : "Email hoặc số điện thoại",
+		"EMAIL" : "Email",
+		"USERNAME" : "Tên đăng nhập",
+		"SIGN_IN" : "Đăng nhập",
+		"REGISTER" : "Đăng ký",
+		"ENTER_EMAIL" : "Nhập email",
+		"EMAIL" : "Email",
+		"ENTER_PASSWORD" : "Nhập mật khẩu",
+		"PASSWORD" : "Mật khẩu",
+		"REMEMBER_ME" : "Ghi nhớ đăng nhập",
+		"USERNAME" : "Tên đăng nhập"
+	}
+}

@@ -1,0 +1,60 @@
+<div class="row">
+    <form data-monster-validate="save()" class="form-horizontal" enctype="multipart/form-data">
+        <div class="col-md-12 ">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        {{'SLIDEBAR.VOTE_CREATE' | translate}}
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form role="form">
+                        <div class="form-body">
+                            
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{'LABEL.TITLE' | translate}}</label>
+                                <div class="input-group col-md-8 col-xs-12">
+                                    <input type="text" class="form-control" data-ng-model="VoteData.title" />
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" ng-repeat="item in total_answer">
+                                <label class="col-md-3 control-label">{{'LABEL.IDEA' | translate}} {{item}}</label>
+                                <div class="input-group col-md-8 col-xs-12">
+                                    <input type="text" class="form-control" ng-model="VoteData.answer[item]" ng-keypress="increaseAnswer($event,item)" placeholder="Thêm 1 ý kiến" autofocus/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-xs-12">
+                                <div class="input-group col-md-8 col-md-offset-3">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="VoteData.hidden_voter" data-ng-checked="VoteData.hidden_voter==1" ng-true-value="1" ng-false-value="0">
+                                        {{'LABEL.PUBLIC_VOTER' | translate}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label class="col-md-3 control-label">{{'LABEL.VOTE_OPTION' | translate}}</label>
+                                <div class="input-group col-md-8 col-xs-12">
+                                    <input type="radio" data-ng-model="VoteData.multi_vote" value="0"/>{{'LABEL.SELECT_1' | translate}}
+                                    <input type="radio" data-ng-model="VoteData.multi_vote" value="1"/>{{'LABEL.SELECT_MANY' | translate}}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <span class="col-md-3 small-title control-label hidden-xs">{{'LABEL.ALLOW_CHOICE_ONE_OR_MANY_IDEA' | translate}}</span>
+                            </div>
+                            <!-- <div class="form-group">
+                                <a class="btn btn-success col-md-offset-2" ng-click="addAnswer()"><i class="fa fa-comment"></i> Thêm một ý kiến</a>
+                            </div>  -->
+                        </div>
+                        <div class="form-actions text-right">
+                            <button class="btn blue" type="button" ng-click="save()"><i class="fa fa-arrow-up"></i> {{'LABEL.SUBMIT' | translate}}</button>
+                            <a class="btn default" ng-click="cancel()">{{'LABEL.CANCEL' | translate}}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

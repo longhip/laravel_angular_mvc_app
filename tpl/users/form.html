@@ -1,0 +1,172 @@
+<div class="row" data-ng-controller="UserCtrl" data-ng-init="viewUser()">
+    <div class="col-md-12 ">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    {{'HEADER.USER_MANAGEMENT' | translate}}
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form role="form" class="form-horizontal" data-monster-validate="save()">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.FULL_NAME' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <input type="text" class="form-control validate[required]" data-ng-model="UserData.fullname">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.BIRTHDAY' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <input type="text" class="form-control validate[required]" data-ng-model="UserData.birthday" date-picker-jquery id="birthday" date-format="d/m/Y"/>
+                                <div class="input-group-btn">
+                                    <button class="btn" type="button" show-datepicker-trigger id-show="birthday"><i class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.GENDER' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <label class="radio-inline"><input type="radio" name="gender" value="1" data-ng-model="UserData.gender">{{'LABEL.MALE' | translate}}</label>
+                                <label class="radio-inline"><input type="radio" name="gender" value="0" data-ng-model="UserData.gender">{{'LABEL.FEMALE' | translate}}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.EMAIL' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                <input type="text" class="form-control validate[required,custom[email]]" data-ng-model="UserData.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.PHONE' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <input type="text" class="form-control validate[required]" data-ng-model="UserData.phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.BRANCH' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <select class="form-control validate[required]" data-ng-model="UserData.branch_id" data-ng-options="item.id as item.name for item in listBranch"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.DEPARTMENT' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <select class="form-control validate[required]" data-ng-model="UserData.department_id" data-ng-options="item.id as item.name for item in listDepartment"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.POSITION' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <select class="form-control validate[required]" data-ng-model="UserData.position_id" data-ng-options="item.id as item.name for item in listPosition"></select>
+                            </div>
+                        </div>
+                        <div ng-if="isGroupUser">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">{{'LABEL.GROUP' | translate}}</label>
+                                <div class="input-group col-md-5">
+                                    <select class="form-control validate[required]" data-ng-model="UserData.group_id" data-ng-options="item.id as item.name for item in listGroup"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.PASSWORD' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <input type="password" name="password" id="password" class="form-control" data-ng-model="UserData.password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{{'LABEL.PASSWORD_CONFIRM' | translate}}</label>
+                            <div class="input-group col-md-5">
+                                <input type="password" class="form-control validate[equals[password]]">
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <div class="input-group col-md-5">
+                                <label class="col-md-3 control-label">
+                                    <input type="checkbox" data-ng-model="UserData.status" data-ng-checked="UserData.status==1" ng-true-value="1" ng-false-value="0">
+                                    {{'LABEL.ACTIVE' | translate}}
+                                </label>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group">                                
+                         <label class="col-md-3 control-label">{{'LABEL.UPLOAD_AVATAR' | translate}}</label>
+                         <div class="input-group col-md-8">
+                            <span class="btn green fileinput-button">
+                                <i class="fa fa-arrow-up"></i>
+                                <span>Chọn tệp</span>
+                                <input type="file" nv-file-select="File" name="File" uploader="avatarUploader"/> 
+                            </span>
+                        </div>   
+
+                    </div>
+
+
+                    <div class="form-group row">
+
+                        <!-- <div class="col-xs-12 col-sm-6"> -->
+                        <div class="col-md-offset-3">
+                            <!--view file uploaded -->
+                            <div class="row" data-ng-repeat="item in avatarUploader.queue">
+                                <div class="col-xs-12 col-sm-6">{{ item.file.name }}</div>
+                                <div class="hidden-xs col-sm-2" data-ng-if="uploader.isHTML5">{{ item.file.size | fileSize }} </div>
+                                <div class="col-xs-12 col-sm-3" data-ng-if="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-1">
+                                    <a href="#" data-ng-click="item.remove()"><i class="text-danger fa fa-trash"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" data-ng-if="uploader.queue.length == 0 && UserData.avatar != ''">
+                                <div class="col-xs-12">
+                                    <img data-ng-src="{{ UserData.avatar_url }}" class="image_preview" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <!--view file uploaded -->
+                            <div class="row" data-ng-repeat="item in uploader.queue">
+                                <div class="col-xs-12 col-sm-6">{{ item.file.name }}</div>
+                                <div class="hidden-xs col-sm-2" data-ng-if="uploader.isHTML5">{{ item.file.size | fileSize }} </div>
+                                <div class="col-xs-12 col-sm-3" data-ng-if="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-1">
+                                    <a href="#" data-ng-click="item.remove()"><i class="text-danger fa fa-trash"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" data-ng-if="uploader.queue.length == 0">
+                                <div class="col-xs-12">{{ UserData.contract }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions text-right">
+                    <button class="btn blue" type="submit">{{'LABEL.SUBMIT' | translate}}</button>
+                    <a class="btn default" ui-sref="app.user.list">{{'LABEL.BACK_TO_LIST' | translate}}</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>

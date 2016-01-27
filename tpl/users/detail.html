@@ -1,0 +1,373 @@
+
+<div class="row margin-top-20" ng-controller="UserCtrl" ng-init="getDetail()">
+    <div class="col-md-3">
+        <div class="portlet light profile-sidebar-portlet">
+            <!-- SIDEBAR USERPIC -->
+            <div class="profile-userpic">
+                <img ng-if="UserData.avatar != ''" ng-src="api/public/{{UserData.avatar}}" class="img-responsive" alt="">
+                <img ng-if="UserData.avatar == ''" src="api/public/avatar.jpg" class="img-responsive" alt="">
+            </div>
+            <!-- END SIDEBAR USERPIC -->
+            <!-- SIDEBAR USER TITLE -->
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                    <span class="text-primary">{{UserData.fullname}}</span>
+                </div>
+                <p>
+                    <strong>{{UserData.department_name}}</strong> - <strong>{{UserData.position_name}}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="portlet light">
+            <div class="portlet-body">
+                <div class="nav nav-pills">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-target="#tab_15_1" data-toggle="tab">
+                                <strong class="text-primary"><i class="icon-user"></i> {{'LABEL.ACCOUNT_INFORMATION' | translate}}</strong> </a>
+                        </li>
+                        <li class="" ng-show="userInfo.id == user_id">
+                            <a data-target="#tab_15_2"  id="setTabPassword" data-toggle="tab">
+                                <strong class="text-primary"><i class="icon-lock"></i> {{'LABEL.CHANGE_PASSWORD' | translate}}</strong></a>
+                        </li>
+                        <li class="" ng-show="userInfo.id == user_id">
+                            <a data-target="#tab_15_3" data-toggle="tab">
+                                <strong class="text-primary"><i class="icon-picture"></i> {{'LABEL.ACCOUNT_AVATAR' | translate}}</strong></a>
+                        </li>
+                        <li class="" ng-show="userInfo.id == user_id">
+                            <a data-target="#tab_15_4" data-toggle="tab">
+                                <strong class="text-primary"><i class="icon-note"></i> {{'LABEL.ACCOUNT_SIGNATURE' | translate}}</strong></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active fade in" id="tab_15_1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!--Start Name-->
+                                    <div ng-show="!ShowEditName" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.FULL_NAME' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.fullname}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a href="" ng-show="userInfo.id == user_id" ng-click="ShowEditName = !ShowEditName">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+                                    <div ng-show="ShowEditName" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.FULL_NAME' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-sm" ng-model="UserData.fullname"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('fullname');ShowEditName = !ShowEditName"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditName = !ShowEditName"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Name-->
+
+                                    <!--Start Department-->
+                                    <div ng-show="!ShowEditDepartment" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.DEPARTMENT' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.department_name}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="getAllDepartment();ShowEditDepartment = !ShowEditDepartment">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+                                    <div ng-show="ShowEditDepartment" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.DEPARTMENT' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <select class="form-control input-sm" data-ng-model="UserData.department_id" ng-options="item.id as item.name for item in listDepartment "></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('department_id');ShowEditDepartment = !ShowEditDepartment"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditDepartment = !ShowEditDepartment"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Department-->
+
+                                    <!--Start Position-->
+                                    <div ng-show="!ShowEditPosition" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.POSITION' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.position_name}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="getAllPosition();ShowEditPosition = !ShowEditPosition">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditPosition" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.POSITION' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <select class="form-control input-sm" data-ng-model="UserData.position_id" ng-options="item.id as item.name for item in listPosition "></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('position_id');ShowEditPosition = !ShowEditPosition"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditPosition = !ShowEditPosition"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Position-->
+
+                                    <!--Start Email-->
+                                    <div ng-show="!ShowEditEmail" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.EMAIL' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.email}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="ShowEditEmail = !ShowEditEmail">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditEmail" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.EMAIL' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-sm" ng-model="UserData.email"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('email');ShowEditEmail = !ShowEditEmail"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditEmail = !ShowEditEmail"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Email-->
+
+                                    <!--Start Phone-->
+                                    <div ng-show="!ShowEditPhone" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.PHONE' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.phone}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="ShowEditPhone = !ShowEditPhone">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditPhone" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.PHONE' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-sm" ng-model="UserData.phone"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('phone');ShowEditPhone = !ShowEditPhone"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditPhone = !ShowEditPhone"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Phone-->
+
+                                    <!--Start BirthDay-->
+                                    <div ng-show="!ShowEditBirthDay" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.BIRTHDAY' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.birthday}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="ShowEditBirthDay = !ShowEditBirthDay">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditBirthDay" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.BIRTHDAY' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <div class="input-group col-md-10">
+                                                    <input type="text" class="form-control" data-ng-model="UserData.birthday" date-picker-jquery id="birthday" date-format="d/m/Y"/>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn" type="button" show-datepicker-trigger id-show="birthday"><i class="fa fa-calendar"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('birthday');ShowEditBirthDay = !ShowEditBirthDay"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditBirthDay = !ShowEditBirthDay"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End BirthDay-->
+
+
+                                    <!--Start Gender-->
+                                    <div ng-show="!ShowEditGender" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.GENDER' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span ng-if="UserData.gender == 1">Nam</span>
+                                            <span ng-if="UserData.gender == 0">Nữ</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="ShowEditGender = !ShowEditGender">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditGender" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.GENDER' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <label class="radio-inline"><input type="radio" name="gender" value="1" data-ng-model="UserData.gender">{{'LABEL.MALE' | translate}}</label>
+                                                <label class="radio-inline"><input type="radio" name="gender" value="0" data-ng-model="UserData.gender">{{'LABEL.FEMALE' | translate}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('gender');ShowEditGender = !ShowEditGender"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditGender = !ShowEditGender"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Gender-->
+
+                                    <!--Start Address-->
+                                    <div ng-show="!ShowEditAddress" class="col-md-12 user-info-list">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.ADDRESS' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <span>{{UserData.address}}</span>
+                                        </div>
+                                        <div class="col-md-2 div-non-padding text-right">
+                                            <a ng-show="userInfo.id == user_id" ng-click="ShowEditAddress = !ShowEditAddress">{{'LABEL.MODIFY' | translate}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="ShowEditAddress" class="col-md-12 user-info-list-edit">
+                                        <div class="col-md-3 div-non-padding text-left">
+                                            <strong class="text-primary">{{'LABEL.ADDRESS' | translate}}</strong>
+                                        </div>
+                                        <div class="col-md-7 div-non-padding">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-sm" ng-model="UserData.address"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <a><span class="label label-success" ng-click="SaveChange('address');ShowEditAddress = !ShowEditAddress"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</span></a>
+                                                <a ng-click="ShowEditAddress = !ShowEditAddress"><span class="label label-danger"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--End Address-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab_15_2">
+                            <div class="margin-top-20">
+                                <form class="form-horizontal" style="display: block" ng-submit="saveChangePassword()">
+                                    <div class="form-group">
+                                        <label class="col-md-3"><strong class="text-primary">{{'LABEL.OLD_PASSWORD' | translate}}</strong></label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control input-sm" ng-model="UserData.old_password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3"><strong class="text-primary">{{'LABEL.NEW_PASSWORD' | translate}}</strong></label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control input-sm" ng-model="UserData.new_password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3"><strong class="text-primary">{{'LABEL.CONFIRM_NEW_PASSWORD' | translate}}</strong></label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control input-sm" ng-model="UserData.confirm_password"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3"></label>
+                                        <div class="col-md-9">
+                                            <button class="btn btn-success" type="submit"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</button>
+                                            <button class="btn btn-danger" type="reset"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab_15_3">
+                            <div class="col-md-6 col-md-offset-3 margin-top-20 text-center">
+                                <img ng-if="newAvatar == false" ng-src="api/public/{{UserData.avatar}}" align="middle" class="img-responsive img-circle" width="200px" alt="">
+                                <img ng-if="newAvatar == true" ng-src="api/public/{{UserData.avatar_preview}}" align="middle" class="img-responsive img-circle" width="200px" alt="">
+                                <img ng-if="newAvatar == false && UserData.avatar == ''" src="api/public/avatar.jpg" align="middle" class="img-responsive img-circle" width="200px" alt="">
+                                <hr/>
+                                <div class="form-group text-center">
+                                    <div class="input-group">
+                                        <span class="btn btn-success fileinput-button">
+                                            <i class="icon-cloud-upload"></i>
+                                            <span>Chọn tệp</span>
+                                            <input type="file" nv-file-select="File" name="File" uploader="avatarUploader"/>
+                                        </span>
+                                        <button class="btn btn-primary" ng-click="saveChangeAvatar()"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</button>
+                                        <button class="btn btn-danger" ng-click="cancelChangeAvatar()"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab_15_4">
+                            <div class="col-md-6 col-md-offset-3 margin-top-20 text-center">
+                                <img ng-if="newSignature == false" ng-src="api/public/{{UserData.signature}}" align="middle" class="img-responsive img-circle" width="200px" alt="">
+                                <img ng-if="newSignature == true" ng-src="api/public/{{UserData.signature_preview}}" align="middle" class="img-responsive img-circle" width="200px" alt="">
+                                <hr/>
+                                <div class="form-group text-center">
+                                    <div class="input-group">
+                                        <span class="btn btn-success fileinput-button">
+                                            <i class="icon-cloud-upload"></i>
+                                            <span>Chọn tệp</span>
+                                            <input type="file" nv-file-select="File" name="File" uploader="signatureUploader"/>
+                                        </span>
+                                        <button class="btn btn-primary" ng-click="saveChangeSignature()"><i class="icon-check"></i> {{'LABEL.USER_SAVE_CHANGE' | translate}}</button>
+                                        <button class="btn btn-danger" ng-click="cancelChangeSignature()"><i class="icon-close"></i> {{'LABEL.CANCEL' |  translate  }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab_15_5">
+                            <p>
+                                Howdy, I'm in Section 4.
+                            </p>
+                            <p>
+                                Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

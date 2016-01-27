@@ -1,0 +1,45 @@
+<div class="row margin-top-10" data-ng-controller="UserCtrl" data-ng-init="listUser()">
+    <div class="col-md-12">
+        <div class="portlet light" ng-repeat="(department_index,department) in listData">
+            <div class="portlet-title">
+                <div class="caption font-blue-sharp">
+                    <i class="icon-users font-blue-sharp"></i>
+                    <span class="caption-subject bold uppercase">{{department.name}}</span>
+                </div>
+                <div class="actions">
+                    <a ng-click="getCreateUser(department_index,department.id)"><button class="btn btn-primary btn-sm btn-circle uppercase"><i class="icon-plus"></i> {{'LABEL.ADD_NEW' | translate}}</button></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-6 margin-bottom-20" ng-repeat="(user_index,user) in department.users | orderBy:'position_id'">
+                        <div class="todo-tasklist-item todo-tasklist-item-border-red" ng-click="goStateDetail(user.id)" >
+                            <img ng-if="user.avatar != ''" class="todo-userpic pull-left" ng-src="api/public/{{user.avatar}}" width="50px" height="50px">
+                            <img ng-if="user.avatar == ''" class="todo-userpic pull-left" ng-src="api/public/avatar.jpg" width="50px" height="50px">
+                            <div class="todo-tasklist-item-title">
+                                {{user.fullname}} | {{user.position_name}}
+                            </div>
+                            <div class="todo-tasklist-item-text">
+                                <span><i class="icon-screen-smartphone"></i>: {{user.phone}}</span>
+                                <span> | </span> <span><i class="icon-envelope-open"></i> {{user.email}}</span>
+                            </div>
+                        </div>
+                        <a><span class="label label-danger"
+                                         mwl-confirm
+                                         title="{{ConfirmationData.title | translate}}"
+                                         message="{{ConfirmationData.message | translate}}"
+                                         confirm-text="<i class='icon-check'></i> {{ConfirmationData.confirm_text | translate}}"
+                                         cancel-text="<i class='icon-close'></i> {{ConfirmationData.cancel_text | translate}}"
+                                         placement="right"
+                                         on-confirm="removeUser(department_index,user_index,user.id)"
+                                         on-cancel=""
+                                         confirm-button-type="primary"
+                                         cancel-button-type="danger">
+                              <i class="icon-close"></i> {{'LABEL.REMOVE' | translate}}
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

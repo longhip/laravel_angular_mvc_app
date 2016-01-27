@@ -1,0 +1,35 @@
+<div class="row" data-ng-controller="PositionCtrl" data-ng-init="viewPosition()">
+    <form data-monster-validate="save()" class="form-horizontal">
+
+        <div class="col-md-12 ">
+            <div class="portlet box blue">
+
+                <div class="portlet-title">
+                    <div class="caption">
+                        {{'HEADER.POSITION_MANAGEMENT' | translate}}
+                    </div>
+                </div>
+
+                <div class="portlet-body form">
+                    <form role="form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-xs-12">{{'LABEL.NAME' | translate}}</label>
+                                <div class="input-group col-xs-12 col-md-6">
+                                    <input type="text" class="form-control validate[required]" data-ng-model="PositionData.name" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions text-right">
+                            <button class="btn blue" type="submit">{{'LABEL.SUBMIT' | translate}}</button>
+                            <a class="btn default" ui-sref="app.position.list">{{'LABEL.BACK_TO_LIST' | translate}}</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

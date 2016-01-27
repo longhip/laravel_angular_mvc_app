@@ -1,0 +1,481 @@
+<div class="row" data-ng-controller="BillCtrl" data-ng-init="load()">
+    <div class="col-lg-12">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <a ui-sref="app.dashboard">{{'LABEL.HOME' | translate}}</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span>Dashboard</span>
+                </li>
+            </ul>
+        </div>
+
+        <h3 class="page-title">{{'LABEL.HOME' | translate}}
+            <!--<small>dashboard &amp; statistics</small>-->
+        </h3>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 ">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-green-sharp">
+                                <span data-counter="counterup" data-value="7800">7800</span>
+                                <small class="font-green-sharp">$</small>
+                            </h3>
+                            <small>TOTAL PROFIT</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-pie-chart"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress">
+                            <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                <span class="sr-only">76% progress</span>
+                            </span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title"> progress </div>
+                            <div class="status-number"> 76% </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 ">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-red-haze">
+                                <span data-counter="counterup" data-value="1349">1349</span>
+                            </h3>
+                            <small>NEW FEEDBACKS</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-like"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress">
+                            <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
+                                <span class="sr-only">85% change</span>
+                            </span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title"> change </div>
+                            <div class="status-number"> 85% </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 ">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-blue-sharp">
+                                <span data-counter="counterup" data-value="567">567</span>
+                            </h3>
+                            <small>NEW ORDERS</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-basket"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress">
+                            <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
+                                <span class="sr-only">45% grow</span>
+                            </span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title"> grow </div>
+                            <div class="status-number"> 45% </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 ">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-purple-soft">
+                                <span data-counter="counterup" data-value="276">276</span>
+                            </h3>
+                            <small>NEW USERS</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-user"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress">
+                            <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                                <span class="sr-only">56% change</span>
+                            </span>
+                        </div>
+                        <div class="status">
+                            <div class="status-title"> change </div>
+                            <div class="status-number"> 57% </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="fa fa-bar-chart-o font-red"></i>
+                            <span class="caption-subject font-red bold uppercase">{{'BILL.BILL' | translate}}</span>
+                            <span class="caption-helper">{{d | date:'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="actions col-sm-3">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn" data-ng-click="down_time()" type="button"><i class="fa fa-arrow-left"></i></button>
+                                </div>
+                                <input type="text" class="form-control" date-events="set_time()" data-ng-model="go_date" date-picker-jquery id="go_date" date-format="d/m/Y"/>
+                                <div class="input-group-btn">
+                                    <button class="btn" data-ng-click="up_time()" type="button"><i class="fa fa-arrow-right"></i></button>
+                                </div>
+                                <div class="input-group-btn">
+                                    <button class="btn" type="button" show-datetimepicker-trigger id-show="go_date"><i class="fa fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row margin-bottom-30">
+                            <div class="col-sm-2">
+                                <button data-ng-show="!showAddForm" data-ng-click="showAddForm=true" class="btn green"><i class="fa fa-plus"></i> {{'BILL.ADD_BILL' | translate}}</button>
+                                <button data-ng-show="showAddForm" data-ng-click="cancel()" class="btn green"><i class="fa fa-th-list"></i> {{'BILL.LIST_BILL' | translate}}</button>
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <p class="visible-xs"></p>
+                                <div class="input-icon right">
+                                    <i class="fa fa-search"></i>
+                                    <input data-ng-keyup="search_change($event)" data-ng-model="search" type="text" class="form-control" placeholder="{{'LABEL.SEARCH' | translate}}">
+                                </div>
+                            </div>
+                        </div>
+                        <!--start add form-->
+                        <div class="portlet light bg-inverse"  data-ng-show="showAddForm">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <span class="caption-subject font-red-sunglo bold uppercase">{{'BILL.ADD_BILL' | translate}}</span>
+                                </div>
+                                <div class="actions">
+                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                        <i class="icon-cloud-upload"></i>
+                                    </a>
+                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                        <i class="icon-wrench"></i>
+                                    </a>
+                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                        <i class="icon-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <!-- BEGIN FORM-->
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <div class="col-md-10 col-md-offset-2">
+                                                <div class="md-checkbox">
+                                                    <input data-ng-model="obj.showroom" type="checkbox" id="cb_is_showroom" class="md-check">
+                                                    <label for="cb_is_showroom">
+                                                        <span></span>
+                                                        <span class="check"></span>
+                                                        <span class="box"></span> {{'BILL.ITEM_FOR_SHOWROOM' | translate}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.BILL_REQUEST' | translate}}</label>
+                                            <div class="col-md-8">
+                                                <textarea data-ng-model="obj.request" class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">{{'BILL.IMAGE_SAMPLE' | translate}}</label>
+                                            <div class="col-md-10">
+                                                <button type="button" data-ng-click="showSelectType()" class="btn green">{{'BILL.SELECT_FROM_LIBRARY' | translate}}</button>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <span class="btn default btn-file">
+                                                        <span class="fileinput-new">{{'LABEL.SELECT_FILE' | translate}}</span>
+                                                        <span class="fileinput-exists">{{'LABEL.CHANGE' | translate}} </span>
+                                                        <input type="file" nv-file-select="" uploader="uploader" multiple  />
+                                                    </span>
+                                                    <span class="fileinput-filename"></span>&nbsp; <a href="#" class="close fileinput-exists" data-dismiss="fileinput"></a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div data-ng-repeat="img in img_pattems" class="thumbnail col-lg-3" data-ng-if="uploader.queue.length==0">
+                                                    <img src="{{img.link}}" style="width: 100%; height: 180px; display: block;cursor: pointer">
+                                                    <div class="caption">
+                                                        <h4>{{img.name}}</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="portlet-body" data-ng-show="uploader.queue.length>0">
+                                                    <div class="table-scrollable table-scrollable-borderless">
+                                                        <table class="table table-hover table-light">
+                                                            <thead>
+                                                            <tr class="uppercase">
+                                                                <th width="50%">{{'LABEL.NAME' | translate}}</th>
+                                                                <th ng-show="uploader.isHTML5">{{'LABEL.SIZE' | translate}}</th>
+                                                                <th ng-show="uploader.isHTML5">{{'LABEL.PROGRESS' | translate}}</th>
+                                                                <th>{{'LABEL.STATUS' | translate}}</th>
+                                                                <th>{{'LABEL.ACTION' | translate}}</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="item in uploader.queue">
+                                                                <td><strong>{{ item.file.name }}</strong></td>
+                                                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                                                <td ng-show="uploader.isHTML5">
+                                                                    <div class="progress progress-sm" style="margin-bottom: 0;">
+                                                                        <div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <span ng-show="item.isSuccess" class="text-success"><i class="glyphicon glyphicon-ok"></i></span>
+                                                                    <span ng-show="item.isCancel" class="text-info"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                                    <span ng-show="item.isError" class="text-danger"><i class="glyphicon glyphicon-remove"></i></span>
+                                                                </td>
+                                                                <td nowrap>
+                                                                    <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
+                                                                    <!--<span class="glyphicon glyphicon-upload"></span> {{'LABEL.UPlOAD' | translate}}-->
+                                                                    <!--</button>-->
+                                                                    <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
+                                                                    <!--<span class="glyphicon glyphicon-ban-circle"></span> {{'LABEL.CANCEL' | translate}}-->
+                                                                    <!--</button>-->
+                                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                                        <span class="glyphicon glyphicon-trash"></span> {{'LABEL.REMOVE' | translate}}
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div>
+                                                        <p>{{'LABEL.UPlOAD_PROGRESS' | translate}}:</p>
+                                                        <div class="progress progress-sm" style="">
+                                                            <div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">-->
+                                                    <!--<span class="glyphicon glyphicon-upload"></span> Upload all-->
+                                                    <!--</button>-->
+                                                    <!--<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">-->
+                                                    <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel all-->
+                                                    <!--</button>-->
+                                                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                                        <span class="glyphicon glyphicon-trash"></span> {{'LABEL.REMOVE_ALL' | translate }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--thong tin nguoi nhan-->
+                                        <h4 data-ng-show="!obj.showroom" class="form-section uppercase">{{'BILL.INFO_TO' | translate}}</h4>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.PHONE' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input auto-complete="" data="to_phones" key="phone" template="template" links="links_source" class="form-control" data-ng-keyup="search_customer($event,'to_phone')" data-ng-class="to_phone_spinner" type="text" data-ng-model="obj.to_phone">
+                                            </div>
+                                            <label class="col-md-2 control-label">{{'BILL.TO_NAME' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.to_name">
+                                            </div>
+                                        </div>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.ADDRESS' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.to_address">
+                                            </div>
+                                            <label class="col-md-2 control-label">{{'BILL.TIME_REQUEST' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group date form_datetime" date-time-picker="dd/mm/yyyy - hh:ii">
+                                                    <input valid="'datetime" id="time_end" data-ng-model="obj.time_end" type="text" size="16" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.EVENT' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.event_name">
+                                            </div>
+                                            <label class="col-md-2 control-label">{{'BILL.EVENT_TIME' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <div class="input-group date form_datetime" date-picker="dd/mm/yyyy">
+                                                    <input valid="'date" id="event_time" data-ng-model="obj.event_time" type="text" size="16" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{obj.event_time}}
+                                            {{obj.time_end}}
+                                        </div>
+                                        <!--thong tin nguoi dat-->
+                                        <h4 data-ng-show="!obj.showroom" class="form-section uppercase">{{'BILL.INFO_FROM' | translate}}</h4>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.PHONE' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input auto-complete="" key="phone" template="template" links="links_source" class="form-control" data-ng-keyup="search_customer($event,'from_phone')" data-ng-class="from_phone_spinner" type="text" data-ng-model="obj.from_phone">
+                                            </div>
+                                            <label class="col-md-2 control-label">{{'BILL.FROM_NAME' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.from_name">
+                                            </div>
+                                        </div>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.ADDRESS' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.from_address">
+                                            </div>
+                                            <label class="col-md-2 control-label">{{'BILL.EMAIL' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.from_email">
+                                            </div>
+                                        </div>
+                                        <div data-ng-show="!obj.showroom" class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.RELATIONSHIP' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" data-ng-model="obj.relationship">
+                                            </div>
+                                        </div>
+                                        <!--thong tin xu ly-->
+                                        <h4 class="form-section uppercase">{{'BILL.INFO_EXECUTE' | translate}}</h4>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.FACTORY' | translate}}</label>
+                                            <div class="col-md-10">
+                                                <div class="md-radio-inline">
+                                                    <div class="md-radio" data-ng-repeat="item in branchs">
+                                                        <input type="radio" id="branch{{$index}}" value="{{item.id}}" data-ng-model="obj.branch_id" class="md-radiobtn">
+                                                        <label for="branch{{$index}}">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span>
+                                                            {{item.name}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.PRICE' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <input valid="currency" class="form-control" type="text" data-ng-model="obj.price">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.TYPE_OF_PAY' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" data-ng-model="obj.pay" ng-options="option.name for option in pay_type_list  track by option.id"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.PERSON_PAY' | translate}}</label>
+                                            <div class="col-md-10">
+                                                <div class="md-radio-inline">
+                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio3" value="1" data-ng-model="obj.person_pay_type" class="md-radiobtn">
+                                                        <label for="radio3">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span>
+                                                            Người nhận thanh toán
+                                                        </label>
+                                                    </div>
+                                                    <div class="md-radio">
+                                                        <input type="radio" id="radio4" value="2" data-ng-model="obj.person_pay_type" class="md-radiobtn">
+                                                        <label for="radio4">
+                                                            <span class="inc"></span>
+                                                            <span class="check"></span>
+                                                            <span class="box"></span>
+                                                            Người gửi thanh toán
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">{{'BILL.CURATOR' | translate}}</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" data-ng-model="obj.user" ng-options="option.fullname for option in users  track by option.id"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-10 col-md-offset-2">
+                                                <div class="md-checkbox">
+                                                    <input type="checkbox" id="cb_is_send_sms" class="md-check">
+                                                    <label for="cb_is_send_sms">
+                                                        <span></span>
+                                                        <span class="check"></span>
+                                                        <span class="box"></span> {{'BILL.SEND_SMS_TO_PERSON_ORDERW_WHENE_DONE' | translate}} </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button data-ng-click="save(1)" type="button" class="btn green">{{'BILL.SEND_TO_WORKER' | translate}}</button>
+                                                <button data-ng-click="save(3)" type="button" class="btn green">{{'BILL.SEND_TO_TRANSPORTER' | translate}}</button>
+                                                <button data-ng-click="cancel()" type="button" class="btn default">{{'LABEL.CANCEL' | translate}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+                        <!--end add form-->
+                        <table class="table table-hover table-light" data-ng-show="!showAddForm">
+                            <thead>
+                            <tr class="header">
+                                <th width="2%">#</th>
+                                <th class="hidden-xs"  width="9%">{{'BILL.FAC' | translate}}</th>
+                                <th width="10%">{{'LABEL.STATUS' | translate}}</th>
+                                <th width="10%">{{'BILL.TIME_SEND' | translate}}</th>
+                                <th class="hidden-xs"  width="20%">{{'BILL.BILL_REQUEST' | translate}}</th>
+                                <th class="hidden-xs"  width="10%">{{'BILL.TO_NAME' | translate}}</th>
+                                <th class="hidden-xs"  width="7%">{{'BILL.PHONE' | translate}}</th>
+                                <th class="hidden-xs"  width="15%">{{'BILL.ADDRESS' | translate}}</th>
+                                <th width="8%" style="text-align: right">{{'BILL.INTO_MONEY' | translate}}</th>
+                                <th width="9%">{{'BILL.PAY' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="bill in bills">
+                                <td >{{$index+1}}</td>
+                                <td class="hidden-xs" >{{bill.branch_name}}</td>
+                                <td style="vertical-align: middle">
+                                    {{bill.status_name}}
+                                    <div class="progress-info">
+                                        <progressbar class="progress-bar-sm" type="{{bill.progress_type}}" value="bill.progress"></progressbar>
+                                    </div>
+                                </td>
+                                <td ><b>{{bill.time_end*1000  | date:'dd-MM-yyyy H:mm' }}</b></td>
+                                <td class="hidden-xs">{{bill.request}}</td>
+                                <td class="hidden-xs"  >{{bill.to_name}}</td>
+                                <td class="hidden-xs"  >{{bill.to_phone}}</td>
+                                <td class="hidden-xs"  >{{bill.to_address}}</td>
+                                <td style="text-align: right;">{{bill.price}}</td>
+                                <td style="vertical-align: middle">{{bill.pay_name}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
