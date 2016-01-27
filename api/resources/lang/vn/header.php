@@ -1,0 +1,87 @@
+<?php
+/**
+ * Monster Admin
+ * Author: tuanda@steed.vn
+ */
+
+return [
+	'USER_MANAGEMENT' => 'Quản lý tài khoản',
+	'COMPANY_MANAGEMENT' => 'Quản lý công ty',
+	'GROUP_MANAGEMENT' => 'Quản lý nhóm quyền',
+	'GROUP_SETTINGS' => 'Cài đặt quyền',
+	'PERMISSION_MANAGEMENT' => 'Quản lý quyền',
+	'CITY_MANAGEMENT' => 'Quản lý tỉnh/thành phố',
+	'DISTRICT_MANAGEMENT' => 'Quản lý quận/huyện',
+	'JOB_PRIORITY_MANAGEMENT' => 'Quản lý độ ưu tiên của công việc',
+	'ASSIGN_STATE_MANAGEMENT' => 'Assign state management',
+	'TASK_MANAGEMENT' => 'Quản lý vụ việc',
+	'TASK_GROUP_MANAGEMENT' => 'Quản lý nhóm vụ việc',
+	'ASSIGN_MANAGEMENT' => 'Quản lý giao việc',
+	'DETAIL_ASSIGN' => 'Chi tiết công việc',
+
+	'DEPARTMENT_MANAGEMENT' => 'Quản lý bộ phận',
+	'BRANCH_MANAGEMENT' => 'Quản lý chi nhánh',
+
+	'ASSIGN_BY_ME' => 'Công việc tôi giao',
+	'ASSIGN_MAIN_PERSON' => 'Công việc tôi là người xử lý chính',
+	'ASSIGN_COORDINATOR' => 'Công việc tôi tham gia',
+	'ASSIGN_BACKER' => 'Công việc tôi theo dõi',
+	'ASSIGN_BY_ME_OUT_OF_DATE' => 'Công việc tôi giao bị quá hạn',
+	'ASSIGN_MAIN_PERSON_OUT_OF_DATE' => 'Công việc tôi xử lý chính bị quá hạn',
+	'ASSIGN_COORDINATOR_OUT_OF_DATE' => 'Công việc tôi tham gia bị quá hạn',
+	'ASSIGN_BACKER_OUT_OF_DATE' => 'Công việc tôi theo dõi bị quá hạn',
+	'REPORT' => 'Báo cáo',
+	'REPORT_RATE_ASSIGN_SUCCESS' => 'Báo cáo tỷ lệ công việc hoàn thành đúng hạn',
+	'UPDATE_MEMBER' => 'Thay đổi thành viên',
+	'ASSIGNMENTCREATE' => 'Tạo yêu cầu giám định mới',
+	'POSITION_MANAGEMENT' => 'Quản lý chức vụ',
+	'SOURCE_MANAGEMENT' => 'Quản lý nguồn yêu cầu',
+	'GROUP_INSPECTION_MANAGEMENT' => 'Quản lý nhóm yêu cầu',
+	'TYPE_INSPECTION_MANAGEMENT' => 'Quản lý loại yêu cầu',
+	'CUSTOMER_MANAGEMENT' => 'Quản lý khách hàng',
+	'CONTACT_MANAGEMENT' => 'Quản lý người yêu cầu',
+	'ASSIGNMENTDETAIL' => 'Chi tiết hồ sơ vụ việc',
+	'REQUESTASSIGNMENT_MANAGEMENT' => 'Gửi yêu cầu giám định',
+	'ASSIGNMENT_MANAGEMENT' => 'Quản lý vụ việc',
+
+	'PERMISSION' => 'Quyền',
+
+	//Communication
+	'CATEGORY_COMMUNICATIONS_MANAGEMENT' => 'Quản lý chuyên mục truyền thông',
+	'NEWS_MANAGEMENT' => 'Tạo tin mới',
+	'NEWS_LIST' => 'Tin mới',
+	'NOTICE_LIST' => 'Thông báo',
+	'WAIT_NEWS' => 'Tin chờ duyệt',
+	'I_SENT' => 'Tin tôi gửi',
+	'TRADITIONAL' => 'Truyền thông',
+	'NEWS' => 'Tin tức',
+	'DRAFT_NEWS' => 'Tin nháp',
+
+	'CATEGORY_LIBRARY_DIGITAL_MANAGEMENT' => 'Quản lý chuyên mục thư viện số',
+	'CATEGORY_LIBRARY_DIGITAL_ADD' => 'Thêm mới thư mục',
+	'FILE_ADD' => 'Tải lên 1 tài liệu',
+
+	//Dương Hải
+	'CATEGORY_DISPATCH_MANAGEMENT' => 'Danh mục văn bản đến',
+	'DISPATCH_MANAGEMENT' => 'Tạo mới văn bản đến',
+	'CATEGORY_NEWS_MANAGEMENT' => 'Danh mục tin tức',
+	'CATEGORY_DOCUMENT_NUM_MANAGEMENT' => 'Danh mục sổ văn bản',
+	'TYPE_OF_DOCUMENT_MANAGEMENT' => 'Danh mục loại văn bản',
+	'CATEGORY_FIELD_MANAGEMENT' => 'Danh mục lĩnh vực',
+	'CATEGORY_SECURITY_MANAGEMENT' => 'Danh mục bảo mật',
+	'CATEGORY_URGENCY_MANAGEMENT' => 'Danh mục mức độ khẩn',
+	'CATEGORY_CRITICAL_MANAGEMENT' => 'Danh mục mức độ quan trọng',
+	'CATEGORY_DEAL_MANAGEMENT' => 'Danh mục xử lý',
+	'CATEGORY_ARCHIVE_MANAGEMENT' => 'Danh mục khu vực lưu trữ',
+	'CATEGORY_DOCUMENT_MANAGEMENT' => 'Danh mục loại văn bản',
+	'DISPATCH_SENT_MANAGEMENT' => 'Tạo mới văn bản đi',
+	'CATEGORY_DISPATCH_SENT_MANAGEMENT' => 'Danh mục văn bản đi',
+	'DISPATCH_INTERNAL_MANAGEMENT' => 'Tạo mới văn bản nội bộ',
+	'CATEGORY_DISPATCH_INTERNAL_MANAGEMENT' => 'Danh mục văn bản nội bộ',
+	'DISPATCH_DARFT_MANAGEMENT' => 'Tạo mới văn bản dự thảo',
+	'CATEGORY_DISPATCH_DRAFT_MANAGEMENT' => 'Danh mục văn bản dự thảo',
+	'CRM_MANAGERMENT' => 'Quản lý khách hàng',
+	'PLAN_MANAGEMENT' => 'Kế hoạch thực hiện',
+    'ADD_NEW_USER'=>'Thêm mới nhân viên',
+    'FEEDBACK_MANAGEMENT' => 'Góp ý/Phản ánh lỗi cho Steed',
+];
