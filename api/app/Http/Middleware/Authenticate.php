@@ -1,23 +1,47 @@
-<?php namespace App\Http\Middleware;
+<?php
 
-use App\Libraries\Auth;
+namespace App\Http\Middleware;
+
 use Closure;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Contracts\Auth\Guard;
 
-class Authenticate {
+class Authenticate
+{
+    /**
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
+    protected $auth;
 
-    public function handle($request, Closure $next) {
-        $token = Input::get('token');
-        $code = strtolower(Input::get('cs_code'));
-        if(Auth::isLogged($code, $token)) {
-            return $next($request);
-        } else {
-            return Response::json([
-                'status'    =>  false,
-                'message'   =>  'MESSAGE.YOU_NEED_LOGIN_TO_DO_THIS_ACTION',
-                'error_token' => true
-            ]);
+    /**
+     * Create a new filter instance.
+     *
+     * @param  Guard  $auth
+     * @return void
+     */
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->guest('auth/login');
+            }
         }
+
+        return $next($request);
     }
 }

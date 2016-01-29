@@ -1,7 +1,7 @@
 var API_PATH = './api/public/api/v1/';
 /* Monster App */
 
-var MonsterApp = angular.module("MonsterApp", [
+var SteedOfficeApp = angular.module('SteedOfficeApp', [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
@@ -9,18 +9,18 @@ var MonsterApp = angular.module("MonsterApp", [
     "pascalprecht.translate",
     "LocalStorageModule",
     "toaster",
-    "ngCookies"
+    "ngCookies",
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
-MonsterApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+SteedOfficeApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
         // global configs go here
     });
 }]);
 
 //AngularJS v1.3.x workaround for old style controller declarition in HTML
-MonsterApp.config(['$controllerProvider', function($controllerProvider) {
+SteedOfficeApp.config(['$controllerProvider', function($controllerProvider) {
     // this option might be handy for migrating old apps, but please don't use it
     // in new ones!
     $controllerProvider.allowGlobals();
@@ -31,7 +31,7 @@ MonsterApp.config(['$controllerProvider', function($controllerProvider) {
  *********************************************/
 
 /* Setup global settings */
-MonsterApp.factory('settings', ['$rootScope', function($rootScope) {
+SteedOfficeApp.factory('settings', ['$rootScope', function($rootScope) {
     // supported languages
     var settings = {
         layout: {
@@ -51,14 +51,14 @@ MonsterApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup connect Nodejs Sever */
-MonsterApp.factory('socket',function(){
+SteedOfficeApp.factory('socket',function(){
     var socket = io.connect('http://103.7.40.9:6868');
     return socket;
 });
 
 
 /* Setup App Main Controller */
-MonsterApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+SteedOfficeApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function() {
         App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
@@ -66,24 +66,21 @@ MonsterApp.controller('AppController', ['$scope', '$rootScope', function($scope,
 }]);
 
 /* Setup Layout Part - Header */
-MonsterApp.controller('HeaderController', ['$scope', function($scope) {
+SteedOfficeApp.controller('HeaderController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
-
-    $translatePartialLoader.addPart('login');
-    $translate.refresh();
 }]);
 
 /* Setup Layout Part - Sidebar */
-MonsterApp.controller('SidebarController', ['$scope', function($scope) {
+SteedOfficeApp.controller('SidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
     });
 }]);
 
 /* Setup Layout Part - Quick Sidebar */
-MonsterApp.controller('QuickSidebarController', ['$scope', function($scope) {
+SteedOfficeApp.controller('QuickSidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         setTimeout(function(){
             QuickSidebar.init(); // init quick sidebar
@@ -92,26 +89,70 @@ MonsterApp.controller('QuickSidebarController', ['$scope', function($scope) {
 }]);
 
 /* Setup Layout Part - Theme Panel */
-MonsterApp.controller('ThemePanelController', ['$scope', function($scope) {
+SteedOfficeApp.controller('ThemePanelController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Demo.init(); // init theme panel
     });
 }]);
 
 /* Setup Layout Part - Footer */
-MonsterApp.controller('FooterController', ['$scope', function($scope) {
+SteedOfficeApp.controller('FooterController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initFooter(); // init footer
     });
 }]);
 
 /* Init global settings and run the app */
-MonsterApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
+SteedOfficeApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view    
 }]);
+/* Init global settings and run the app */
+SteedOfficeApp.run(function($rootScope, settings, $state, $location, $http, $cookieStore,socket) {
+    $rootScope.rootAuth = {};
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.rootAuth = $cookieStore.get('CurrentUser');
+        if ($rootScope.rootAuth == null) {
+           $location.path('access/login');
+        }
+        else{
+          $state.current = toState;
+          if ($state.current.name == 'access.login') {
+            $location.path('app/dashboard');
+          }
+        }
+    });
+    socket.on('get notification', function(data) {
+        if(data.user.id == $rootScope.rootAuth.id && data.domain == window.location.hostname){
+            $cookieStore.remove('CurrentUser');
+            $location.path('access/login');
+            $rootScope.$digest();
+        }
+    })
+});
+SteedOfficeApp.config(function($httpProvider) {
+  $httpProvider.interceptors.push(['$q', '$location','$cookieStore', function($q, $location,$cookieStore) {
+    return {
+      'request': function(config) {
+        config.headers = config.headers || {};
+        if ($cookieStore.get('CurrentUser') != null) {
+          config.headers.Authorization = 'Bearer ' + $cookieStore.get('CurrentUser').token;
+        }
+        return config;
+      },
+      'responseError': function(response) {
+        if (response.status === 401) {
+            $cookieStore.remove('CurrentUser');
+            $location.path('access/login');
+          }
+          return $q.reject(response);
+        }
+      };
+    }]);
+  }
+)
 
-MonsterApp.config(function ($translateProvider, localStorageServiceProvider, $translatePartialLoaderProvider) {
+SteedOfficeApp.config(function ($translateProvider, localStorageServiceProvider, $translatePartialLoaderProvider) {
     $translateProvider.useLoader('$translatePartialLoader', {
         urlTemplate: 'languages/{part}/{lang}.json'
     });

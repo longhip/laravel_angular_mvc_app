@@ -1,4 +1,4 @@
-MonsterApp.directive('ngSpinnerBar', ['$rootScope',
+SteedOfficeApp.directive('ngSpinnerBar', ['$rootScope',
     function($rootScope) {
         return {
             link: function(scope, element, attrs) {
@@ -37,7 +37,7 @@ MonsterApp.directive('ngSpinnerBar', ['$rootScope',
 ])
 
 // Handle global LINK click
-MonsterApp.directive('a', function() {
+SteedOfficeApp.directive('a', function() {
     return {
         restrict: 'E',
         link: function(scope, elem, attrs) {
@@ -51,7 +51,7 @@ MonsterApp.directive('a', function() {
 });
 
 // Handle Dropdown Hover Plugin Integration
-MonsterApp.directive('dropdownMenuHover', function () {
+SteedOfficeApp.directive('dropdownMenuHover', function () {
   return {
     link: function (scope, elem) {
       elem.dropdownHover();

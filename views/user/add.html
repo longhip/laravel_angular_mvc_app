@@ -1,0 +1,55 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">{{'BREADCRUMB.USER' | translate}}</a>
+        </li>
+    </ul>
+    <div data-ng-include="'tpl/page-toolbar.html'"></div>
+</div>
+<h3 class="page-title"> {{'LABEL.ADD_USER' | translate}} </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <form>
+                            <div class="form-group">
+                                <label for="">{{'LABEL.NAME' | translate}}</label>
+                                <input type="text" class="form-control" ng-model="userData.name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">{{'LABEL.EMAIL' | translate}}</label>
+                                <input type="text" class="form-control" ng-model="userData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="">{{'LABEL.PHONE' | translate}}</label>
+                                <input type="text" class="form-control" ng-model="userData.phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="">{{'LABEL.PASSWORD' | translate}}</label>
+                                <input type="password" class="form-control" ng-model="userData.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="">{{'LABEL.RE_PASSWORD' | translate}}</label>
+                                <input type="password" class="form-control" ng-model="userData.re_password">
+                            </div>
+                            <div class="form-group text-right">
+                               <button class="btn green btn-block" ng-click="store()"><i class="fa fa-check"></i> Thêm</button>
+                               <button class="btn red btn-block"><i class="fa fa-ban"></i> Hủy</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->

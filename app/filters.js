@@ -1,4 +1,4 @@
-MonsterApp.filter('fileSize', function() {
+SteedOfficeApp.filter('fileSize', function() {
     return function(bytes) {
 
         var type  = 'bytes';
@@ -16,13 +16,13 @@ MonsterApp.filter('fileSize', function() {
     };
 });
 
-MonsterApp.filter("sanitize", ['$sce', function($sce) {
+SteedOfficeApp.filter("sanitize", ['$sce', function($sce) {
         return function(htmlCode){
             return $sce.trustAsHtml(htmlCode);
         }
 }]);
 
-MonsterApp.filter("letterfilter", [ function() {
+SteedOfficeApp.filter("letterfilter", [ function() {
     return function(items, searchItem) {
         var filtered = []; 
         searchItem = searchItem.toLowerCase();       

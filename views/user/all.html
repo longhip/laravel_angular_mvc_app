@@ -1,0 +1,61 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">{{'BREADCRUMB.USER' | translate}}</a>
+        </li>
+    </ul>
+    <div data-ng-include="'tpl/page-toolbar.html'"></div>
+</div>
+<h3 class="page-title"> {{'LABEL.ALL_USER' | translate}} </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row" ng-init="index()">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-sharp">
+                    <button class="btn btn-default">{{'ACTION.ADD_NEW' | translate}}</button>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light">
+                        <thead>
+                            <tr class="uppercase">
+                                <th> {{'LABEL.NAME' | translate}} </th>
+                                <th> {{'LABEL.EMAIL' | translate}} </th>
+                                <th> {{'LABEL.PHONE' | translate}} </th>
+                                <th> {{'LABEL.STATUS' | translate}} </th>
+                                <th width="15%"> {{'LABEL.ACTION' | translate}} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(i, user) in listUserData">
+                               <td>{{user.name}}</td>
+                               <td>{{user.email}}</td>
+                               <td>{{user.phone}}</td>
+                               <td>
+                                    <span ng-if="user.active == 1" class="label label-success">{{'LABEL.ACTIVE' | translate}}</span>
+                                    <span ng-if="user.active == 0" class="label label-default">{{'LABEL.NON_ACTIVE' | translate}}</span>
+                               </td>
+                               <td width="15%">
+                                    <button class="btn blue btn-sm"><i class="fa fa-edit"></i> {{'ACTION.EDIT' | translate}}</button>
+                                    <button class="btn red btn-sm"><i class="fa fa-times-circle"></i> {{'ACTION.DELETE' | translate}}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->

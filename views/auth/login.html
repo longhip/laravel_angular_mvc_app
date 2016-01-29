@@ -1,0 +1,27 @@
+<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler">
+</div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+
+<div class="logo">
+    <a href="index.html">
+        <img src="assets/layouts/layout/img/logo.png" alt=""/>
+    </a>
+</div>
+
+<!-- BEGIN LOGIN -->
+<div class="content" ng-controller="AuthCtrl">
+    <!-- BEGIN LOGIN FORM -->
+    <form class="login-form" ng-submit="login()">        
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="{{'LABEL.EMAILORPHONE' | translate}}" data-ng-model="Credential.email"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" placeholder="{{'LABEL.PASSWORD' | translate}}" data-ng-model="Credential.password"/>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-block uppercase">{{'LABEL.SIGN_IN' | translate}}</button>
+        </div>        
+    </form>
+    <!-- END LOGIN FORM -->   
+</div>

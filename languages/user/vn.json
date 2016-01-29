@@ -1,0 +1,25 @@
+{
+	"LABEL": {
+		"ALL_USER" : "Tất cả người dùng",
+		"ADD_USER" : "Thêm mới người dùng",
+		"NAME": "Tên",
+		"PHONE": "Số điện thoại",
+		"EMAIL": "Email",
+		"STATUS": "Trạng thái",
+		"ACTION": "Thao tác",
+		"ACTIVE": "Kích hoạt",
+		"NON_ACTIVE": "Chưa kích hoạt",
+		"PASSWORD": "Mật khẩu",
+		"RE_PASSWORD": "Nhập lại mật khẩu"
+
+	},
+	"BREADCRUMB": {
+		"USER" : "Người dùng"
+	},
+	"ACTION": {
+		"DELETE" : "Xóa",
+		"ADD_NEW" : "Thêm mới",
+		"EDIT" : "Sửa"
+
+	}
+}
