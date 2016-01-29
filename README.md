@@ -5,7 +5,7 @@ Author: longhip.dev@gmail.com
 ## Clone
 
 ```sh
-$ git clone 
+$ git clone https://github.com/longhip/steedoffice_core_mvc.git
 ```
 
 ## Composer update dependencies
