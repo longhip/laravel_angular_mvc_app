@@ -9,4 +9,6 @@ angular.module('SteedOfficeApp').controller('GeneralPageController', ['$rootScop
         $rootScope.settings.layout.pageBodySolid = false;
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
+
+    $scope.date = '01-12-1995';
 }]);

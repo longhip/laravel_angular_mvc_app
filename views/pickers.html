@@ -77,6 +77,24 @@
                 <!-- BEGIN FORM-->
                 <form action="#" class="form-horizontal form-bordered">
                     <div class="form-body">
+                        <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label custom-text">Ngày công văn đến:
+                                        </label>
+                                         <div class="input-group col-md-8 col-xs-12">
+                                            <input type="text" datetime-picker-jquery name="time_arrival" id="time_arrival" date-format="d/m/Y - H:i" class="form-control" ng-model="AssignmentData.time_arrival" required>
+                                            <div class="input-group-btn">
+                                                <button class="btn" type="button" show-datetimepicker-trigger id-show="time_arrival"><i class="fa fa-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Disable Past Dates</label>
+                            <div class="col-md-3">
+                                <input type="text" ng-model="date" date-picker class="form-control"  date-options="dd-mm-yyyy" />
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Default Datepicker</label>
                             <div class="col-md-3">
@@ -102,7 +120,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Start With Years</label>
                             <div class="col-md-3">
-                                <div class="input-group input-medium date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy">
                                     <input type="text" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
@@ -622,5 +640,6 @@
 </div>
 <!-- END MAIN CONTENT -->
 <script>
-    ComponentsDateTimePickers.init(); // init todo page
+// ComponentsDateTimePickers.init(); // init todo page
 </script>
+

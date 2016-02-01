@@ -25,13 +25,13 @@
                 <div class="tab-content">
                     <!-- PERSONAL INFO TAB -->
                     <div class="tab-pane active" id="tab_1_1">
-                        <form role="form" action="#">
+                        <form steedoffice-validate="create()">
                             <div class="form-group">
                                 <label class="control-label">First Name</label>
-                                <input type="text" placeholder="John" class="form-control" /> </div>
+                                <input type="text" placeholder="John" class="form-control validate[required]"/> </div>
                             <div class="form-group">
                                 <label class="control-label">Last Name</label>
-                                <input type="text" placeholder="Doe" class="form-control" /> </div>
+                                <input type="text" placeholder="Doe" class="form-control validate[required]" /> </div>
                             <div class="form-group">
                                 <label class="control-label">Mobile Number</label>
                                 <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control" /> </div>
@@ -47,10 +47,9 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Website Url</label>
-                                <input type="text" placeholder="http://www.mywebsite.com" class="form-control" /> </div>
+                                <input type="text" placeholder="http://www.mywebsite.com" ng-model="name" class="form-control validate[required]" /> </div>
                             <div class="margiv-top-10">
-                                <a href="#" class="btn green-haze"> Save Changes </a>
-                                <a href="#" class="btn default"> Cancel </a>
+                                <button type="submit" class="btn green-haze"> Save Changes </button>
                             </div>
                         </form>
                     </div>

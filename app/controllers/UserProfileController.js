@@ -7,4 +7,8 @@ angular.module('SteedOfficeApp').controller('UserProfileController', function($r
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageBodySolid = true;
     $rootScope.settings.layout.pageSidebarClosed = true;
+
+    $scope.create = function(){
+    	console.log('process');
+    }
 }); 

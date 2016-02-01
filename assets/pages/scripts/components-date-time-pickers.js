@@ -1,12 +1,11 @@
 var ComponentsDateTimePickers = function () {
-
     var handleDatePickers = function () {
 
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
                 rtl: App.isRTL(),
                 orientation: "left",
-                autoclose: true
+                autoclose: true,
             });
             //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }

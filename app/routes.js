@@ -96,15 +96,13 @@ SteedOfficeApp.config(function($stateProvider, $urlRouterProvider) {
             controller:'UserCtrl',
             templateUrl: "views/user/add.html",
         })
-
     // AngularJS plugins
-    .state('app.fileupload', {
-        url: "/file_upload",
-        templateUrl: "views/file_upload.html",
+    .state('app.upload_demo', {
+        url: "/upload-demo",
+        templateUrl: "views/upload-demo/demo.html",
         data: {
             pageTitle: 'AngularJS File Upload'
         },
-        controller: "GeneralPageController",
         resolve: {
             deps: ['$ocLazyLoad', function($ocLazyLoad) {
                 return $ocLazyLoad.load([{
@@ -115,7 +113,7 @@ SteedOfficeApp.config(function($stateProvider, $urlRouterProvider) {
                 }, {
                     name: 'SteedOfficeApp',
                     files: [
-                        'app/controllers/GeneralPageController.js'
+                        'app/controllers/upload-demo/UploadDemoCtrl.js'
                     ]
                 }]);
             }]
@@ -246,23 +244,9 @@ SteedOfficeApp.config(function($stateProvider, $urlRouterProvider) {
                     name: 'SteedOfficeApp',
                     insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                     files: [
-                        'assets/global/plugins/clockface/css/clockface.css',
-                        'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
-                        'assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
-                        'assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css',
-                        'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css',
-                        'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
-
-                        'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
-                        'assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
-                        'assets/global/plugins/clockface/js/clockface.js',
-                        'assets/global/plugins/moment.min.js',
-                        'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js',
-                        'assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
-                        'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
-
-                        'assets/pages/scripts/components-date-time-pickers.min.js',
-
+                        'assets/angular/plugins/datetime_picker/datetime-picker.js',
+                        'assets/global/plugins/jquery-datetimepicker/jquery.datetimepicker.css',
+                        'assets/global/plugins/jquery-datetimepicker/jquery.datetimepicker.js',
                         'app/controllers/GeneralPageController.js'
                     ]
                 }]);
@@ -378,6 +362,10 @@ SteedOfficeApp.config(function($stateProvider, $urlRouterProvider) {
 
                         'assets/global/plugins/jquery.sparkline.min.js',
                         'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js',
+
+                        'assets/global/plugins/jquery-validate/css/validationEngine.jquery.css',
+                        'assets/global/plugins/jquery-validate/js/jquery.validationEngine.js',
+                        'assets/global/plugins/jquery-validate/js/jquery.validationEngine-en.js',
 
                         'assets/pages/scripts/profile.min.js',
 

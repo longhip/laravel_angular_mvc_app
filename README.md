@@ -5,10 +5,18 @@ Author: longhip.dev@gmail.com
 ## Clone
 
 ```sh
-$ git clone https://github.com/longhip/steedoffice_core_mvc.git
+$ git clone https://steedoffice.unfuddle.com/git/steedoffice_steedoffice-core-mvc/
+```
+## Install package for app
+
+```sh
+$ cd /path/to/project
+```
+```sh
+$ npm install
 ```
 
-## Composer update dependencies
+## Composer update dependencies for api
 
 ```sh
 $ cd /path/to/project

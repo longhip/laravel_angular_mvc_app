@@ -35,7 +35,29 @@ SteedOfficeApp.directive('ngSpinnerBar', ['$rootScope',
         };
     }
 ])
+SteedOfficeApp.directive('steedofficeValidate', function($window, $parse) {
+        return {
+            restrict: 'A',
+            required: 'form',
+            link: function(scope, element, attrs) {
+                var fn = $parse(attrs.steedofficeValidate);
 
+                element.bind('submit', function(event) {
+                    if (!element.validationEngine('validate')) {
+                        return false;
+                    }
+                    scope.$apply(function() {
+                        fn(scope, {
+                            $event: event
+                        });
+                    });
+                });
+                angular.element($window).bind('resize', function() {
+                    element.validationEngine('updatePromptsPosition');
+                });
+            }
+        }
+    })
 // Handle global LINK click
 SteedOfficeApp.directive('a', function() {
     return {
@@ -48,6 +70,132 @@ SteedOfficeApp.directive('a', function() {
             }
         }
     };
+});
+
+// SteedOfficeApp.directive('datePicker', function () {
+//     return {
+//         restrict: 'A',
+//         require: 'ngModel',
+//         scope: {
+//             ngModel: '=',
+//         },
+//         link: function (scope, element, attrs, ngModelCtrl) {
+//             if(scope.ngModel !='' && scope.ngModel != undefined){
+//                 var parts = scope.ngModel.split("-");
+//                 element.datepicker({
+//                     onSelect: function (date) {
+//                         ngModelCtrl.$setViewValue(date);
+//                         scope.$apply();
+//                     }
+//                 },'setDate', new Date(
+//                     parseInt(parts[2], 10),
+//                     parseInt(parts[1], 10) - 1,
+//                     parseInt(parts[0], 10)
+//                 ));
+//             }
+//             else{
+//                 element.datepicker({
+//                     onSelect: function (date) {
+//                         ngModelCtrl.$setViewValue(date);
+//                         scope.$apply();
+//                     }
+//                 });
+//             }
+//         }
+//     };
+// });
+
+SteedOfficeApp.directive('scrollToItem', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            scrollTo: "@"
+        },
+        link: function(scope, $elm, attr) {
+
+            $elm.on('click', function() {
+                $('html,body').animate({
+                    scrollTop: $(scope.scrollTo).offset().top
+                }, "slow");
+            });
+        }
+    }
+})
+SteedOfficeApp.directive("datetimePickerJquery", function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, el, atts, ngModel) {
+
+            var date_format = atts.dateFormat;
+
+            el.datetimepicker({
+                lang: 'vi',
+                inline: false,
+                onChangeDateTime: function(dp, $input) {
+                    scope.$apply(function() {
+                        ngModel.$setViewValue(dp);
+                    });
+                },
+                format: date_format,
+            });
+        }
+    }
+});
+SteedOfficeApp.directive("datePickerJquery", function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, el, atts, ngModel) {
+
+            var date_format = atts.dateFormat;
+
+            el.datetimepicker({
+                lang: 'vi',
+                inline: false,
+                timepicker: false,
+                onChangeDateTime: function(dp, $input) {
+                    scope.$apply(function() {
+                        ngModel.$setViewValue(dp);
+                    });
+                },
+                format: date_format,
+            });
+        }
+    }
+});
+SteedOfficeApp.directive("timePickerJquery", function() {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, el, atts, ngModel) {
+
+            var date_format = atts.dateFormat;
+
+            el.datetimepicker({
+                lang: 'vi',
+                inline: false,
+                datepicker: false,
+                onChangeDateTime: function(dp, $input) {
+                    scope.$apply(function() {
+                        ngModel.$setViewValue(dp);
+                    });
+                },
+                format: date_format,
+            });
+        }
+    }
+});
+SteedOfficeApp.directive("showDatetimepickerTrigger", function() {
+    return {
+        restrict: 'A',
+        link: function(scope, el, attrs) {
+            $(el).click(function(event) {
+                var id = attrs.idShow;
+                $('#' + id).datetimepicker('show');
+            })
+        }
+    }
 });
 
 // Handle Dropdown Hover Plugin Integration

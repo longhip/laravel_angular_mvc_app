@@ -10,16 +10,11 @@ angular.module('SteedOfficeApp').controller('AuthCtrl', function($rootScope, $sc
 	$scope.login = function(){
 		AuthService.postLogin($scope.Credential).success(function(response){
 			if(response.status){
-				$scope.userData = response.data;
+				$scope.userData = response.data.user;
 				$scope.userData.token = response.data.token;
 				$cookieStore.put('CurrentUser',$scope.userData);
 				ToastFactory.popSuccess(response.message);
 				$state.go('app.dashboard');
-				$scope.checkLoginData = {
-					user:$scope.userData,
-					domain:window.location.hostname
-				}
-				socket.emit('send notification',$scope.checkLoginData);
 			}
 			else{
 				ToastFactory.popErrors(response.message);

@@ -1,4 +1,4 @@
-var API_PATH = './api/public/api/v1/';
+var API_PATH = 'api/public/api/v1/';
 /* Monster App */
 
 var SteedOfficeApp = angular.module('SteedOfficeApp', [
@@ -29,26 +29,6 @@ SteedOfficeApp.config(['$controllerProvider', function($controllerProvider) {
 /********************************************
  END: BREAKING CHANGE in AngularJS v1.3.x:
  *********************************************/
-
-/* Setup global settings */
-SteedOfficeApp.factory('settings', ['$rootScope', function($rootScope) {
-    // supported languages
-    var settings = {
-        layout: {
-            pageSidebarClosed: false, // sidebar menu state
-            pageContentWhite: true, // set page content layout
-            pageBodySolid: false, // solid body color state
-            pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
-        },
-        assetsPath: 'assets',
-        globalPath: 'assets/global',
-        layoutPath: 'assets/layouts/layout',
-    };
-
-    $rootScope.settings = settings;
-
-    return settings;
-}]);
 
 /* Setup connect Nodejs Sever */
 SteedOfficeApp.factory('socket',function(){
@@ -107,9 +87,33 @@ SteedOfficeApp.run(["$rootScope", "settings", "$state", function($rootScope, set
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view    
 }]);
+SteedOfficeApp.run(function($rootScope, $state,$interval,config, $location, $http, $cookieStore,socket) {
+    if(config.enableClientAuthExpire){
+        $interval(function(){
+           if($rootScope.rootAuth != null){
+                if($cookieStore.get('time_out') != null){
+                    $cookieStore.put('time_out',config.timeDelayCheckAuthExpire + $cookieStore.get('time_out'));
+                }
+                else{
+                    $cookieStore.put('time_out',config.timeDelayCheckAuthExpire);
+                }
+           }
+           if($cookieStore.get('time_out') != null && $cookieStore.get('time_out') >= config.timeExpireAuth){
+                $http.get(API_PATH + 'auth/logout').success(function(response){
+                    if(response.status){
+                        $cookieStore.remove('CurrentUser');
+                        $cookieStore.remove('time_out');
+                        $location.path('access/login');
+                    }
+                })
+            }
+        },config.timeDelayCheckAuthExpire);
+    }
+});
 /* Init global settings and run the app */
-SteedOfficeApp.run(function($rootScope, settings, $state, $location, $http, $cookieStore,socket) {
+SteedOfficeApp.run(function($rootScope, $state,$interval, $location, $http, $cookieStore,socket) {
     $rootScope.rootAuth = {};
+
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
         $rootScope.rootAuth = $cookieStore.get('CurrentUser');
         if ($rootScope.rootAuth == null) {
@@ -120,15 +124,9 @@ SteedOfficeApp.run(function($rootScope, settings, $state, $location, $http, $coo
           if ($state.current.name == 'access.login') {
             $location.path('app/dashboard');
           }
+          
         }
     });
-    socket.on('get notification', function(data) {
-        if(data.user.id == $rootScope.rootAuth.id && data.domain == window.location.hostname){
-            $cookieStore.remove('CurrentUser');
-            $location.path('access/login');
-            $rootScope.$digest();
-        }
-    })
 });
 SteedOfficeApp.config(function($httpProvider) {
   $httpProvider.interceptors.push(['$q', '$location','$cookieStore', function($q, $location,$cookieStore) {
@@ -137,6 +135,7 @@ SteedOfficeApp.config(function($httpProvider) {
         config.headers = config.headers || {};
         if ($cookieStore.get('CurrentUser') != null) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('CurrentUser').token;
+          $cookieStore.remove('time_out');
         }
         return config;
       },
@@ -156,11 +155,7 @@ SteedOfficeApp.config(function ($translateProvider, localStorageServiceProvider,
     $translateProvider.useLoader('$translatePartialLoader', {
         urlTemplate: 'languages/{part}/{lang}.json'
     });
-    
-    // Tell the module what language to use by default
     $translateProvider.preferredLanguage('vn');
-    // Tell the module to store the language in the cookies
     $translateProvider.useCookieStorage();
     $translatePartialLoaderProvider.addPart('default');
-    //add login
 });

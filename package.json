@@ -1,0 +1,25 @@
+{
+  "name": "steedoffice_core_mvc",
+  "version": "1.0.0",
+  "description": "Author: longhip.dev@gmail.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longhip/steedoffice_core_mvc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longhip/steedoffice_core_mvc/issues"
+  },
+  "homepage": "https://github.com/longhip/steedoffice_core_mvc#readme",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "express": "^4.13.4",
+    "gulp": "^3.9.0",
+    "socket.io": "^1.4.5"
+  }
+}
