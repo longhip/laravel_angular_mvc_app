@@ -1,4 +1,4 @@
-## Steedoffice Core (MVC).
+## Laravel Angular MVC App.
 
 Author: longhip.dev@gmail.com
 
